@@ -138,7 +138,7 @@ build: $(binexe)
 
 .PHONY: vet
 vet: $(SOURCES) $(METASOURCES)
-	$(go) vet $(IMPORT) $(COMMAND)
+	$(go) vet "$(IMPORT)" $(if $(COMMAND),"$(COMMAND)",)
 
 .PHONY: run
 run: $(runsh)
@@ -147,7 +147,7 @@ $(bindir) $(pkgver) $(pkgver)/$(triple):
 	@$(test) -d "$(@)" || $(mkdir) "$(@)"
 
 $(binexe): $(SOURCES) $(METASOURCES) $(bindir)
-	$(go) build -o "$(@)" $(goflags) $(srcdir)
+	$(go) build -o "$(@)" $(goflags) "$(srcdir)"
 	@$(echo) " -- success: $(@)"
 
 $(runsh):
