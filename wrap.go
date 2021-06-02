@@ -1,6 +1,7 @@
 package wrap
 
 import (
+	"fmt"
 	"strings"
 	"unicode"
 )
@@ -62,7 +63,7 @@ func split(s string, w int, h string) ([]string, string) {
 		b.WriteRune(r)
 		l++
 		n++
-		if l == w && n < len([]rune(s))-1 {
+		if l == w {
 			a = append(a, b.String()+h)
 			l = 0
 			b.Reset()
@@ -73,6 +74,7 @@ func split(s string, w int, h string) ([]string, string) {
 	if l > 0 {
 		r = b.String()
 	}
+	fmt.Printf("{%#v, %#v}\n", a, r)
 	return a, r
 }
 
